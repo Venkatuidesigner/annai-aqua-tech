@@ -1,5 +1,5 @@
 export const APP_CONSTANTS = {
-  WHATSAPP_NUMBER: '919999999999',
+  WHATSAPP_NUMBER: '919786178889',
   COMPANY_NAME: 'Annai Aqua Tech',
   TAGLINE: 'Pure Water. Healthy Life.',
   ADMIN_USERNAME: 'admin',
