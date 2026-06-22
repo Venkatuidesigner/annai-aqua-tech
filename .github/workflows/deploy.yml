@@ -6,102 +6,76 @@ on:
       - main
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: true
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-      - name: Set up Node.js 20
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm install --no-audit --no-fund
 
-      - name: Patch browserslist — replace regex with string ops (no slash in pattern)
+      - name: Print tool versions
         run: |
-          cat > /tmp/patch_browserslist.py << 'PYEOF'
-          import os
-
-          f = 'node_modules/browserslist/node.js'
-          if not os.path.exists(f):
-              print('browserslist/node.js not found, skipping')
-              exit(0)
-
-          with open(f, 'r') as fh:
-              c = fh.read()
-
-          # Replacement: pure string logic, zero regex literals, zero slashes in pattern.
-          # Original did: name.replace(/^@[^/]+\/[^/]+/, '').indexOf('.') !== -1
-          # i.e. strip "@scope/pkg" prefix from scoped package, then check for dot.
-          NEW = "  if ((name.charAt(0)==='@'?name.split('/').slice(2).join('/'):name).indexOf('.')!==-1) {"
-
-          # Handle original (unpatched) and any previously patched variants
-          VARIANTS = [
-              "  if (name.replace(/^@[^/]+\\/[^/]+/, '').indexOf('.') !== -1) {",
-              "  if (name.replace(/^@[^\\/]+\\/[^\\/]+/, '').indexOf('.') !== -1) {",
-              "  if (name.replace(/^@[^\\x2F]+[\\x2F][^\\x2F]+/, '').indexOf('.') !== -1) {",
-          ]
-
-          patched = False
-          for OLD in VARIANTS:
-              if OLD in c:
-                  c = c.replace(OLD, NEW)
-                  patched = True
-                  print('Patched browserslist/node.js (matched variant)')
-                  break
-
-          if patched:
-              with open(f, 'w') as fh:
-                  fh.write(c)
-          else:
-              lines = c.split('\n')
-              print('WARNING: No known pattern matched.')
-              print('Line 30 content:', repr(lines[29]) if len(lines) >= 30 else 'N/A')
-          PYEOF
-          python3 /tmp/patch_browserslist.py
+          node -v
+          npm -v
+          npx ng version || true
 
       - name: Build Angular app
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
+        run: npm run build -- --configuration production --output-path dist/site --base-href "/${{ github.event.repository.name }}/"
+
+      - name: Resolve publish directory
+        id: resolve_publish_dir
+        shell: bash
         run: |
-          npm run build -- --configuration=production || {
-            echo ""
-            echo "=== Angular Error Log ==="
-            find /tmp -name "angular-errors.log" 2>/dev/null -exec cat {} \;
+          set -euo pipefail
+          echo "Repository name: ${{ github.event.repository.name }}"
+          echo "Dist tree:"
+          ls -la || true
+          ls -la dist || true
+          find dist -maxdepth 4 -type d -print || true
+
+          publish_dir="$(ls -d dist/site/browser 2>/dev/null | head -n 1 || true)"
+          if [[ -z "${publish_dir}" ]]; then
+            echo "ERROR: Could not find build output under dist/site/browser"
             exit 1
-          }
+          fi
 
-      - name: Copy index.html as 404.html for SPA routing
-        run: cp dist/arvo-water/browser/index.html dist/arvo-water/browser/404.html
+          echo "Publish dir root files:"
+          ls -la "${publish_dir}" | head -n 50 || true
+          test -f "${publish_dir}/index.html"
 
-      - name: Configure GitHub Pages
+          echo "Using publish_dir=${publish_dir}"
+          echo "publish_dir=${publish_dir}" >> "${GITHUB_OUTPUT}"
+
+      - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/arvo-water/browser
+          path: ${{ steps.resolve_publish_dir.outputs.publish_dir }}
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
