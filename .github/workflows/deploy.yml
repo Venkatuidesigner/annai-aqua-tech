@@ -32,25 +32,46 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      - name: Patch browserslist V8 regex lexer bug
+      - name: Patch browserslist — replace regex with string ops (no slash in pattern)
         run: |
           cat > /tmp/patch_browserslist.py << 'PYEOF'
           import os
+
           f = 'node_modules/browserslist/node.js'
           if not os.path.exists(f):
-              print('File not found, skipping')
+              print('browserslist/node.js not found, skipping')
               exit(0)
+
           with open(f, 'r') as fh:
               c = fh.read()
-          # Replace [^/] with [^\/] so V8 lexer does not treat the / inside
-          # the character class as the regex terminator (V8 parsing bug).
-          fixed = c.replace('[^/]', r'[^\/]')
-          if fixed != c:
+
+          # Replacement: pure string logic, zero regex literals, zero slashes in pattern.
+          # Original did: name.replace(/^@[^/]+\/[^/]+/, '').indexOf('.') !== -1
+          # i.e. strip "@scope/pkg" prefix from scoped package, then check for dot.
+          NEW = "  if ((name.charAt(0)==='@'?name.split('/').slice(2).join('/'):name).indexOf('.')!==-1) {"
+
+          # Handle original (unpatched) and any previously patched variants
+          VARIANTS = [
+              "  if (name.replace(/^@[^/]+\\/[^/]+/, '').indexOf('.') !== -1) {",
+              "  if (name.replace(/^@[^\\/]+\\/[^\\/]+/, '').indexOf('.') !== -1) {",
+              "  if (name.replace(/^@[^\\x2F]+[\\x2F][^\\x2F]+/, '').indexOf('.') !== -1) {",
+          ]
+
+          patched = False
+          for OLD in VARIANTS:
+              if OLD in c:
+                  c = c.replace(OLD, NEW)
+                  patched = True
+                  print('Patched browserslist/node.js (matched variant)')
+                  break
+
+          if patched:
               with open(f, 'w') as fh:
-                  fh.write(fixed)
-              print('Patched: [^/] -> [^\\/] in browserslist/node.js')
+                  fh.write(c)
           else:
-              print('browserslist already clean, no patch needed')
+              lines = c.split('\n')
+              print('WARNING: No known pattern matched.')
+              print('Line 30 content:', repr(lines[29]) if len(lines) >= 30 else 'N/A')
           PYEOF
           python3 /tmp/patch_browserslist.py
 
