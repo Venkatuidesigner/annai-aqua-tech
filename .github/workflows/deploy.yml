@@ -18,23 +18,52 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js 18
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm install --legacy-peer-deps
+
+      - name: Patch browserslist regex (Node.js compatibility guard)
+        run: |
+          python3 - <<'PYEOF'
+          import re, os
+
+          path = 'node_modules/browserslist/node.js'
+          if not os.path.exists(path):
+              print('browserslist not found, skipping patch')
+              exit(0)
+
+          with open(path, 'r', encoding='utf-8') as f:
+              content = f.read()
+
+          # Fix the truncated/broken regex that some Node versions produce
+          fixed = re.sub(
+              r"if \(name\.replace\(/\^@\[^/\]\+\\[^\n]*\n\s*throw",
+              "if (name.replace(/^@[^/]+\\/[^/]+/, '').indexOf('.') !== -1) {\n    throw",
+              content
+          )
+
+          if fixed != content:
+              with open(path, 'w', encoding='utf-8') as f:
+                  f.write(fixed)
+              print('browserslist regex patched successfully')
+          else:
+              print('browserslist looks clean — no patch needed')
+          PYEOF
 
       - name: Build Angular app
-        run: npx ng build --configuration=production
+        run: ./node_modules/.bin/ng build --configuration=production
 
-      - name: Copy index.html as 404.html (SPA fallback)
+      - name: Copy index.html as 404.html for SPA routing
         run: cp dist/arvo-water/browser/index.html dist/arvo-water/browser/404.html
 
       - name: Configure GitHub Pages
