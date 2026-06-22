@@ -29,11 +29,23 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Show versions
+        run: |
+          node --version
+          npm --version
+          npx ng version --skip-confirmation 2>/dev/null || true
+
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
       - name: Build Angular app
-        run: npm run build -- --configuration=production
+        run: |
+          npm run build -- --configuration=production || {
+            echo ""
+            echo "=== Angular Error Log ==="
+            find /tmp -name "angular-errors.log" 2>/dev/null -exec cat {} \;
+            exit 1
+          }
 
       - name: Copy index.html as 404.html for SPA routing
         run: cp dist/arvo-water/browser/index.html dist/arvo-water/browser/404.html
