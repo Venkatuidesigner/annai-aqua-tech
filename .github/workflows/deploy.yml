@@ -23,20 +23,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js 22
+      - name: Set up Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
-      - name: Show versions
-        run: |
-          node --version
-          npm --version
-          npx ng version --skip-confirmation 2>/dev/null || true
-
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
+
+      - name: Patch browserslist V8 regex lexer bug
+        run: |
+          cat > /tmp/patch_browserslist.py << 'PYEOF'
+          import os
+          f = 'node_modules/browserslist/node.js'
+          if not os.path.exists(f):
+              print('File not found, skipping')
+              exit(0)
+          with open(f, 'r') as fh:
+              c = fh.read()
+          # Replace [^/] with [^\/] so V8 lexer does not treat the / inside
+          # the character class as the regex terminator (V8 parsing bug).
+          fixed = c.replace('[^/]', r'[^\/]')
+          if fixed != c:
+              with open(f, 'w') as fh:
+                  fh.write(fixed)
+              print('Patched: [^/] -> [^\\/] in browserslist/node.js')
+          else:
+              print('browserslist already clean, no patch needed')
+          PYEOF
+          python3 /tmp/patch_browserslist.py
 
       - name: Build Angular app
         run: |
