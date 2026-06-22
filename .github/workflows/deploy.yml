@@ -9,16 +9,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    concurrency:
-      group: pages
-      cancel-in-progress: true
 
     steps:
       - name: Checkout code
@@ -27,13 +22,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 18
           cache: npm
 
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
+      - name: Clean install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm cache clean --force
+          npm install
+          npm install browserslist@4.23.0
 
-      - name: Print tool versions
+      - name: Print versions
         run: |
           node -v
           npm -v
@@ -42,31 +41,18 @@ jobs:
       - name: Build Angular app
         env:
           NODE_OPTIONS: --max_old_space_size=4096
-        run: npm run build -- --configuration production --output-path dist/site --base-href "/${{ github.event.repository.name }}/"
+        run: npx ng build --configuration=production --output-path=dist/site --base-href="/annai-aqua-tech/"
 
       - name: Resolve publish directory
         id: resolve_publish_dir
         shell: bash
         run: |
-          set -euo pipefail
-          echo "Repository name: ${{ github.event.repository.name }}"
-          echo "Dist tree:"
-          ls -la || true
-          ls -la dist || true
-          find dist -maxdepth 4 -type d -print || true
-
-          publish_dir="$(ls -d dist/site/browser 2>/dev/null | head -n 1 || true)"
-          if [[ -z "${publish_dir}" ]]; then
-            echo "ERROR: Could not find build output under dist/site/browser"
-            exit 1
+          set -e
+          publish_dir="dist/site/browser"
+          if [ ! -d "$publish_dir" ]; then
+            publish_dir="dist/site"
           fi
-
-          echo "Publish dir root files:"
-          ls -la "${publish_dir}" | head -n 50 || true
-          test -f "${publish_dir}/index.html"
-
-          echo "Using publish_dir=${publish_dir}"
-          echo "publish_dir=${publish_dir}" >> "${GITHUB_OUTPUT}"
+          echo "publish_dir=$publish_dir" >> $GITHUB_OUTPUT
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -77,5 +63,4 @@ jobs:
           path: ${{ steps.resolve_publish_dir.outputs.publish_dir }}
 
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
