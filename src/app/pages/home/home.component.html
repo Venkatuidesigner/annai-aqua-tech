@@ -1,0 +1,579 @@
+<!-- ============================================================
+     HERO — Compact premium hero with realistic purifier image
+     ============================================================ -->
+<section class="hero-section relative flex flex-col overflow-hidden -mt-16 md:-mt-20"
+  style="min-height: 78vh;"
+  [style.background]="'linear-gradient(140deg, ' + heroSlides[currentSlide()].bgFrom + ' 0%, ' + heroSlides[currentSlide()].bgTo + ' 100%)'">
+
+  <div class="absolute inset-0 hero-grid pointer-events-none opacity-30"></div>
+  <div class="absolute top-0 right-1/3 w-[600px] h-[600px] rounded-full blur-3xl opacity-10 pointer-events-none"
+    [style.background]="heroSlides[currentSlide()].color"></div>
+
+  <div class="container-custom relative z-10 flex-1 flex items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-16 items-center w-full pt-28 pb-14 md:pt-36 md:pb-16">
+
+      <!-- Left — Text -->
+      <div class="text-white order-2 lg:order-1">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/8
+                    text-xs font-bold tracking-widest uppercase text-blue-300 mb-5 backdrop-blur-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+          {{ heroSlides[currentSlide()].tag }}
+        </div>
+
+        <h1 class="font-black font-heading mb-5 leading-none">
+          <span class="block text-4xl md:text-5xl xl:text-6xl text-white/90">
+            {{ heroSlides[currentSlide()].headline }}
+          </span>
+          <span class="block text-4xl md:text-5xl xl:text-6xl gradient-text mt-1">
+            {{ heroSlides[currentSlide()].highlight }}
+          </span>
+        </h1>
+
+        <p class="text-base text-white/60 leading-relaxed mb-8 max-w-md">
+          {{ heroSlides[currentSlide()].sub }}
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 mb-8">
+          <a routerLink="/products" class="btn-primary px-7 py-3.5">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Explore Products
+          </a>
+          <button (click)="whatsapp.openDemoRequest()" class="btn-whatsapp px-7 py-3.5">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Book Free Demo
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-white/45 text-sm">
+          @for (badge of ['ISI Certified', 'Free Installation', '1-Year Warranty', 'AMC Available']; track badge) {
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+              </svg>
+              {{ badge }}
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Right — Realistic wall-mount RO purifier -->
+      <div class="order-1 lg:order-2 relative flex items-center justify-center py-4">
+
+        <!-- Soft glow behind product -->
+        <div class="absolute w-72 h-72 rounded-full blur-3xl opacity-20 pointer-events-none"
+          [style.background]="heroSlides[currentSlide()].color"></div>
+
+        <!-- Product image container -->
+        <div class="relative z-10 animate-float-slow" style="filter: drop-shadow(0 24px 48px rgba(0,0,0,0.5)) drop-shadow(0 0 40px rgba(37,99,235,0.3))">
+
+          <!-- Realistic RO Purifier SVG (LG/Kent style) -->
+          <svg viewBox="0 0 340 400" class="w-52 md:w-64 xl:w-72" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- Main body gradient — deep black to dark charcoal -->
+              <linearGradient id="bodyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1a1a1a"/>
+                <stop offset="40%" stop-color="#0d0d0d"/>
+                <stop offset="100%" stop-color="#080808"/>
+              </linearGradient>
+              <!-- Gloss reflection -->
+              <linearGradient id="gloss" x1="0%" y1="0%" x2="30%" y2="100%">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
+                <stop offset="50%" stop-color="rgba(255,255,255,0.02)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </linearGradient>
+              <!-- Chrome gradient for dispenser -->
+              <linearGradient id="chrome" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#6b7280"/>
+                <stop offset="30%" stop-color="#d1d5db"/>
+                <stop offset="55%" stop-color="#f9fafb"/>
+                <stop offset="75%" stop-color="#d1d5db"/>
+                <stop offset="100%" stop-color="#6b7280"/>
+              </linearGradient>
+              <linearGradient id="chromeV" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#e5e7eb"/>
+                <stop offset="50%" stop-color="#9ca3af"/>
+                <stop offset="100%" stop-color="#d1d5db"/>
+              </linearGradient>
+              <!-- Leaf silver gradient -->
+              <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6b7280"/>
+                <stop offset="40%" stop-color="#c4c9d4"/>
+                <stop offset="70%" stop-color="#9ca3af"/>
+                <stop offset="100%" stop-color="#4b5563"/>
+              </linearGradient>
+              <linearGradient id="leafGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#4b5563"/>
+                <stop offset="40%" stop-color="#b0b8c8"/>
+                <stop offset="100%" stop-color="#6b7280"/>
+              </linearGradient>
+              <filter id="softGlow">
+                <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+              </filter>
+              <filter id="shadow">
+                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="rgba(0,0,0,0.6)"/>
+              </filter>
+            </defs>
+
+            <!-- OUTER BORDER/FRAME — subtle edge highlight -->
+            <rect x="18" y="8" width="304" height="360" rx="26" fill="rgba(255,255,255,0.06)"/>
+
+            <!-- MAIN BODY -->
+            <rect x="20" y="10" width="300" height="356" rx="24" fill="url(#bodyBg)"/>
+
+            <!-- Gloss overlay (top-left reflection) -->
+            <rect x="20" y="10" width="300" height="356" rx="24" fill="url(#gloss)"/>
+
+            <!-- ── LEFT LARGE LEAF ── -->
+            <g opacity="0.9">
+              <!-- Main leaf shape -->
+              <path d="M38,280 C38,280 28,210 60,160 C80,128 100,100 118,72 C126,58 130,42 126,28
+                       C118,42 108,62 95,82 C78,108 55,138 42,175 C28,215 28,260 38,290 Z"
+                fill="url(#leafGrad)" opacity="0.85"/>
+              <!-- Leaf center vein -->
+              <path d="M126,28 C118,60 95,100 72,140 C55,168 42,200 38,280"
+                stroke="rgba(200,210,225,0.5)" stroke-width="1.2" fill="none"/>
+              <!-- Side veins left -->
+              <path d="M115,55 C100,68 85,78 70,88" stroke="rgba(200,210,225,0.3)" stroke-width="0.8" fill="none"/>
+              <path d="M100,80 C85,92 70,100 55,108" stroke="rgba(200,210,225,0.3)" stroke-width="0.8" fill="none"/>
+              <path d="M88,108 C72,118 58,126 44,132" stroke="rgba(200,210,225,0.25)" stroke-width="0.8" fill="none"/>
+              <path d="M72,138 C58,146 46,152 36,156" stroke="rgba(200,210,225,0.2)" stroke-width="0.7" fill="none"/>
+              <path d="M62,168 C50,174 40,178 30,180" stroke="rgba(200,210,225,0.15)" stroke-width="0.7" fill="none"/>
+              <!-- Curved decorative lines emanating from leaf -->
+              <path d="M80,95 C65,115 55,145 52,175" stroke="rgba(150,165,180,0.25)" stroke-width="0.6" fill="none" stroke-dasharray="3,3"/>
+              <path d="M68,128 C55,148 48,172 46,200" stroke="rgba(150,165,180,0.2)" stroke-width="0.6" fill="none" stroke-dasharray="4,4"/>
+            </g>
+
+            <!-- ── RIGHT LARGE LEAF ── -->
+            <g opacity="0.9">
+              <path d="M302,280 C302,280 312,210 280,160 C260,128 240,100 222,72 C214,58 210,42 214,28
+                       C222,42 232,62 245,82 C262,108 285,138 298,175 C312,215 312,260 302,290 Z"
+                fill="url(#leafGrad2)" opacity="0.85"/>
+              <!-- Leaf center vein -->
+              <path d="M214,28 C222,60 245,100 268,140 C285,168 298,200 302,280"
+                stroke="rgba(200,210,225,0.5)" stroke-width="1.2" fill="none"/>
+              <!-- Side veins right -->
+              <path d="M225,55 C240,68 255,78 270,88" stroke="rgba(200,210,225,0.3)" stroke-width="0.8" fill="none"/>
+              <path d="M240,80 C255,92 270,100 285,108" stroke="rgba(200,210,225,0.3)" stroke-width="0.8" fill="none"/>
+              <path d="M252,108 C268,118 282,126 296,132" stroke="rgba(200,210,225,0.25)" stroke-width="0.8" fill="none"/>
+              <path d="M268,138 C282,146 294,152 304,156" stroke="rgba(200,210,225,0.2)" stroke-width="0.7" fill="none"/>
+              <path d="M278,168 C290,174 300,178 310,180" stroke="rgba(200,210,225,0.15)" stroke-width="0.7" fill="none"/>
+              <!-- Curved decorative lines -->
+              <path d="M260,95 C275,115 285,145 288,175" stroke="rgba(150,165,180,0.25)" stroke-width="0.6" fill="none" stroke-dasharray="3,3"/>
+              <path d="M272,128 C285,148 292,172 294,200" stroke="rgba(150,165,180,0.2)" stroke-width="0.6" fill="none" stroke-dasharray="4,4"/>
+            </g>
+
+            <!-- ── SMALL CENTER LEAF (bottom) ── -->
+            <g opacity="0.75">
+              <path d="M170,275 C170,275 155,250 158,225 C160,210 165,198 170,188
+                       C175,198 180,210 182,225 C185,250 170,275 170,275 Z"
+                fill="url(#leafGrad)" opacity="0.7"/>
+              <line x1="170" y1="188" x2="170" y2="272" stroke="rgba(200,210,225,0.4)" stroke-width="0.9"/>
+              <path d="M165,210 C160,214 156,216 152,217" stroke="rgba(200,210,225,0.25)" stroke-width="0.7" fill="none"/>
+              <path d="M175,210 C180,214 184,216 188,217" stroke="rgba(200,210,225,0.25)" stroke-width="0.7" fill="none"/>
+              <path d="M163,228 C158,232 153,233 149,233" stroke="rgba(200,210,225,0.2)" stroke-width="0.6" fill="none"/>
+              <path d="M177,228 C182,232 187,233 191,233" stroke="rgba(200,210,225,0.2)" stroke-width="0.6" fill="none"/>
+            </g>
+
+            <!-- ── PARTICLE DOTS ── -->
+            <circle cx="200" cy="50" r="2.5" fill="rgba(200,215,240,0.6)"/>
+            <circle cx="215" cy="38" r="1.8" fill="rgba(200,215,240,0.4)"/>
+            <circle cx="226" cy="58" r="1.2" fill="rgba(200,215,240,0.35)"/>
+            <circle cx="188" cy="35" r="1.5" fill="rgba(200,215,240,0.3)"/>
+            <circle cx="240" cy="44" r="1" fill="rgba(200,215,240,0.25)"/>
+            <circle cx="130" cy="45" r="2" fill="rgba(200,215,240,0.5)"/>
+            <circle cx="118" cy="32" r="1.5" fill="rgba(200,215,240,0.35)"/>
+            <circle cx="105" cy="52" r="1.2" fill="rgba(200,215,240,0.3)"/>
+            <circle cx="280" cy="140" r="2" fill="rgba(200,215,240,0.3)"/>
+            <circle cx="295" cy="158" r="1.3" fill="rgba(200,215,240,0.2)"/>
+            <circle cx="50" cy="145" r="1.8" fill="rgba(200,215,240,0.25)"/>
+            <circle cx="35" cy="160" r="1.2" fill="rgba(200,215,240,0.2)"/>
+
+            <!-- ── CENTER DISPLAY PANEL ── -->
+            <rect x="128" y="120" width="84" height="76" rx="6" fill="rgba(15,15,20,0.9)"/>
+            <rect x="130" y="122" width="80" height="72" rx="5" fill="rgba(255,255,255,0.03)"/>
+
+            <!-- Power row -->
+            <circle cx="144" cy="138" r="3.5" fill="#22c55e" filter="url(#softGlow)"/>
+            <rect x="152" y="135" width="40" height="1.5" rx="0.75" fill="rgba(255,255,255,0.2)"/>
+            <text x="170" y="142" text-anchor="middle" font-family="Arial" font-size="7" fill="rgba(255,255,255,0.55)" letter-spacing="0.5">Power</text>
+
+            <!-- Divider -->
+            <line x1="132" y1="148" x2="208" y2="148" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+
+            <!-- Tank Full row -->
+            <circle cx="144" cy="158" r="3.5" fill="rgba(255,255,255,0.15)"/>
+            <text x="170" y="163" text-anchor="middle" font-family="Arial" font-size="7" fill="rgba(255,255,255,0.35)" letter-spacing="0.5">Tank Full</text>
+
+            <!-- Divider -->
+            <line x1="132" y1="168" x2="208" y2="168" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+
+            <!-- Replace Filter row -->
+            <circle cx="144" cy="178" r="3.5" fill="rgba(255,255,255,0.1)"/>
+            <text x="170" y="183" text-anchor="middle" font-family="Arial" font-size="7" fill="rgba(255,255,255,0.3)" letter-spacing="0.5">Replace Filter</text>
+
+            <!-- ── BRAND TEXT ── -->
+            <text x="170" y="104" text-anchor="middle" font-family="Helvetica,Arial" font-size="12" font-weight="300" fill="rgba(220,230,245,0.6)" letter-spacing="3">ANNAI</text>
+
+            <!-- ── DISPENSER ASSEMBLY (chrome) ── -->
+            <!-- Back plate -->
+            <rect x="120" y="296" width="100" height="52" rx="10" fill="url(#chromeV)" opacity="0.9"/>
+            <rect x="122" y="298" width="96" height="48" rx="9" fill="url(#gloss)" opacity="0.5"/>
+
+            <!-- Dispenser arm -->
+            <rect x="148" y="308" width="44" height="8" rx="4" fill="url(#chrome)"/>
+            <rect x="158" y="308" width="24" height="28" rx="4" fill="url(#chromeV)"/>
+
+            <!-- Tap head -->
+            <ellipse cx="170" cy="338" rx="14" ry="6" fill="url(#chrome)"/>
+            <ellipse cx="170" cy="338" rx="10" ry="4" fill="rgba(200,210,220,0.6)"/>
+            <ellipse cx="170" cy="338" rx="5" ry="2.5" fill="rgba(255,255,255,0.8)"/>
+
+            <!-- Water drops -->
+            <ellipse cx="170" cy="349" rx="2.5" ry="3.5" fill="rgba(96,165,250,0.8)"/>
+            <ellipse cx="170" cy="357" rx="2" ry="2.8" fill="rgba(96,165,250,0.6)"/>
+            <ellipse cx="170" cy="364" rx="1.5" ry="2.2" fill="rgba(96,165,250,0.4)"/>
+
+            <!-- LOGO badge top-left -->
+            <circle cx="64" cy="32" r="14" fill="rgba(255,255,255,0.06)"/>
+            <circle cx="64" cy="32" r="12" fill="rgba(255,255,255,0.04)"/>
+            <text x="64" y="29" text-anchor="middle" font-family="Helvetica,Arial" font-size="5.5" font-weight="700" fill="rgba(220,230,245,0.5)">RO+UV</text>
+            <text x="64" y="37" text-anchor="middle" font-family="Helvetica,Arial" font-size="4.5" fill="rgba(220,230,245,0.4)">+UF+TDS</text>
+
+            <!-- Bottom edge light strip -->
+            <rect x="60" y="362" width="220" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+
+            <!-- Floor shadow -->
+            <ellipse cx="170" cy="378" rx="88" ry="9" fill="rgba(0,0,0,0.55)"/>
+          </svg>
+        </div>
+
+        <!-- Floating spec cards -->
+        <div class="absolute -left-2 md:-left-6 top-12 float-card">
+          <div class="glass rounded-2xl px-3 py-2.5 text-white">
+            <div class="text-xs text-blue-200 font-medium mb-0.5">Purification</div>
+            <div class="flex items-baseline gap-1">
+              <span class="text-lg font-black">99.9</span>
+              <span class="text-xs text-white/50">% pure</span>
+            </div>
+            <div class="mt-1.5 w-28 h-1 rounded-full bg-white/20 overflow-hidden">
+              <div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-400" style="width:99.9%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute -right-2 md:-right-6 top-1/3 float-card-alt">
+          <div class="glass rounded-2xl px-3 py-2.5 text-white">
+            <div class="text-xs text-cyan-200 font-medium mb-0.5">TDS Level</div>
+            <div class="text-lg font-black">42 <span class="text-xs font-medium text-white/50">ppm</span></div>
+            <div class="flex items-center gap-1 mt-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span class="text-xs text-emerald-300 font-semibold">Excellent</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute -bottom-2 left-1/4 float-card" style="animation-delay:0.8s">
+          <div class="glass rounded-xl px-3 py-2 text-white">
+            <div class="flex items-center gap-1.5">
+              <div class="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+                <svg class="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-xs font-semibold whitespace-nowrap">7-Stage RO + UV</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide dots -->
+  <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-20">
+    @for (slide of heroSlides; track $index; let i = $index) {
+      <button (click)="goToSlide(i)"
+        [ngClass]="currentSlide() === i ? 'w-7 h-2 bg-white rounded-full' : 'w-2 h-2 bg-white/30 rounded-full'"
+        class="transition-all duration-300 cursor-pointer"
+        [attr.aria-label]="'Go to slide ' + (i + 1)">
+      </button>
+    }
+  </div>
+</section>
+
+<!-- ============================================================
+     TICKER — Marquee strip
+     ============================================================ -->
+<div class="bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-600 py-3 overflow-hidden">
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      @for (item of tickerItems; track item) {
+        <span class="inline-flex items-center gap-2 px-6 text-white text-sm font-semibold whitespace-nowrap">{{ item }}</span>
+      }
+      @for (item of tickerItems; track item) {
+        <span class="inline-flex items-center gap-2 px-6 text-white text-sm font-semibold whitespace-nowrap">{{ item }}</span>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     FEATURED PRODUCTS — Best Sellers (Position 2)
+     ============================================================ -->
+<section class="section bg-white dark:bg-gray-950">
+  <div class="container-custom">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
+      <div>
+        <span class="badge badge-blue mb-4">Top Picks</span>
+        <h2 class="section-title">Our Best Sellers</h2>
+        <p class="text-gray-500 dark:text-gray-400 mt-3 max-w-lg">
+          India's most trusted home RO purifiers — chosen by 25,000+ families.
+        </p>
+      </div>
+      <a routerLink="/products"
+        class="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold hover:gap-3 transition-all duration-200 group flex-shrink-0">
+        View All Products
+        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+
+    @if (isLoading()) {
+      <app-loading-spinner></app-loading-spinner>
+    } @else if (featuredProducts().length > 0) {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        @for (product of featuredProducts().slice(0, 4); track product.id) {
+          <app-product-card [product]="product"></app-product-card>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY CHOOSE US
+     ============================================================ -->
+<section class="section bg-gray-50 dark:bg-gray-900">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <span class="badge badge-blue mb-4">Why Annai Aqua Tech</span>
+      <h2 class="section-title mb-5">Built for Purity.<br>Designed for Life.</h2>
+      <p class="section-subtitle mx-auto text-center">
+        We combine cutting-edge technology with 12 years of expertise to deliver water purification you can trust.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (f of features; track f.title) {
+        <div class="feature-card group">
+          <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center shadow-md
+                      bg-gradient-to-br from-blue-600 to-cyan-500
+                      group-hover:scale-110 group-hover:shadow-blue-500/30 transition-all duration-300">
+            @switch (f.icon) {
+              @case ('shield') {
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              }
+              @case ('droplets') {
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 2C8 2 5 7 5 11.5a7 7 0 0014 0C19 7 16 2 12 2z"/>
+                </svg>
+              }
+              @case ('zap') {
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              }
+              @case ('truck') {
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+                </svg>
+              }
+            }
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">{{ f.title }}</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{{ f.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PURIFICATION TECHNOLOGY
+     ============================================================ -->
+<section class="section bg-white dark:bg-gray-950">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <span class="badge badge-cyan mb-4">Our Technology</span>
+      <h2 class="section-title mb-5">7-Stage Purification<br>Process</h2>
+      <p class="section-subtitle mx-auto text-center">
+        Each stage is engineered to eliminate specific contaminants, ensuring every drop is perfectly pure.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-7 gap-4">
+      @for (stage of purificationStages; track stage.step) {
+        <div class="text-center">
+          <div class="w-20 h-20 mx-auto rounded-2xl flex flex-col items-center justify-center mb-3 shadow-md border border-white dark:border-gray-700"
+            [style.background-color]="stage.color">
+            <span class="text-2xl mb-0.5">{{ stage.icon }}</span>
+            <span class="text-gray-700 font-black" style="font-size:9px;">STAGE {{ stage.step }}</span>
+          </div>
+          <h4 class="text-xs font-bold text-gray-800 dark:text-gray-200 mb-1 leading-tight">{{ stage.name }}</h4>
+          <p class="text-xs text-gray-500 dark:text-gray-400 leading-snug hidden xl:block">{{ stage.desc }}</p>
+        </div>
+      }
+    </div>
+
+    <div class="mt-12 text-center">
+      <a routerLink="/products"
+        class="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold text-base hover:gap-3 transition-all duration-200 group">
+        View All Purifier Models
+        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS
+     ============================================================ -->
+<section class="stats-section section relative overflow-hidden"
+  style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0e7490 100%);">
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="absolute inset-0 hero-grid opacity-30"></div>
+    <div class="absolute -top-32 left-1/3 w-96 h-96 rounded-full bg-blue-600/20 blur-3xl"></div>
+    <div class="absolute -bottom-32 right-1/4 w-80 h-80 rounded-full bg-cyan-500/15 blur-3xl"></div>
+  </div>
+  <div class="container-custom relative z-10">
+    <div class="text-center mb-14">
+      <span class="badge-pill mb-4">Our Milestones</span>
+      <h2 class="section-title text-white mb-4">Trusted by Thousands</h2>
+      <p class="text-blue-200 text-lg max-w-xl mx-auto">Delivering pure water to homes and businesses across Tamil Nadu since 2012.</p>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (stat of stats; track stat.label; let i = $index) {
+        <div class="glass rounded-3xl p-8 text-center group hover:scale-105 transition-transform duration-300">
+          <div class="text-4xl md:text-5xl xl:text-6xl font-black text-white mb-2 tabular-nums">
+            {{ animatedStats()[i] | number }}{{ stat.suffix }}
+          </div>
+          <p class="text-blue-200 font-semibold text-sm">{{ stat.label }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROMO BANNER
+     ============================================================ -->
+<section class="section bg-gray-50 dark:bg-gray-900">
+  <div class="container-custom">
+    <div class="relative overflow-hidden rounded-3xl p-10 md:p-16"
+      style="background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 40%, #0891b2 100%);">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/10 blur-2xl"></div>
+        <div class="absolute -bottom-20 -left-10 w-60 h-60 rounded-full bg-cyan-400/15 blur-2xl"></div>
+        <div class="absolute inset-0 hero-grid opacity-20"></div>
+      </div>
+      <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+        <div class="text-white text-center lg:text-left">
+          <div class="badge-pill mb-4 text-xs">Limited Time Offer</div>
+          <h2 class="text-3xl md:text-5xl font-black font-heading mb-4 leading-tight">
+            Get a <span class="text-cyan-300">FREE Home Demo</span><br>
+            & ₹2,000 Off on Install
+          </h2>
+          <p class="text-blue-100 text-lg max-w-lg leading-relaxed">
+            Book your free home demonstration today. Our expert technician will visit, test your water quality, and recommend the perfect purifier — absolutely free.
+          </p>
+        </div>
+        <div class="flex flex-col gap-4 items-center flex-shrink-0">
+          <button (click)="whatsapp.openDemoRequest()"
+            class="whitespace-nowrap px-10 py-5 rounded-2xl font-black text-lg bg-white text-blue-800
+                   hover:bg-blue-50 transition-all duration-300 shadow-2xl hover:shadow-white/20
+                   hover:-translate-y-1 flex items-center gap-3">
+            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Book Free Demo Now
+          </button>
+          <p class="text-blue-200 text-sm">No purchase obligation. Expert advice included.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+     ============================================================ -->
+<section class="section bg-white dark:bg-gray-950">
+  <div class="container-custom">
+    <div class="text-center mb-14">
+      <span class="badge badge-blue mb-4">Testimonials</span>
+      <h2 class="section-title mb-4">What Our Customers Say</h2>
+      <p class="section-subtitle mx-auto text-center">Real stories from real families across Chennai.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      @for (t of testimonials; track t.name) {
+        <div class="card p-7 group hover:border-blue-200 dark:hover:border-blue-700/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+          <div class="flex gap-1 mb-4">
+            @for (s of [1,2,3,4,5]; track s) {
+              <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            }
+          </div>
+          <svg class="w-7 h-7 text-blue-200 dark:text-blue-900 mb-3" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+          </svg>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 text-sm">"{{ t.text }}"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+              {{ t.name.charAt(0) }}
+            </div>
+            <div>
+              <p class="font-bold text-gray-900 dark:text-white text-sm">{{ t.name }}</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">{{ t.role }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FINAL CTA
+     ============================================================ -->
+<section class="section bg-gray-50 dark:bg-gray-900">
+  <div class="container-custom text-center">
+    <span class="badge badge-cyan mb-6">Get Started Today</span>
+    <h2 class="section-title mb-6 max-w-2xl mx-auto">Ready for Cleaner,<br>Healthier Water?</h2>
+    <p class="section-subtitle mx-auto text-center mb-10">
+      Join 25,000+ satisfied customers who trust Annai Aqua Tech for their daily water purification needs.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a routerLink="/products" class="btn-primary text-base px-10 py-4">
+        Browse Products
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+      <button (click)="whatsapp.openDemoRequest()" class="btn-whatsapp text-base px-10 py-4">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Book Free Home Demo
+      </button>
+    </div>
+  </div>
+</section>

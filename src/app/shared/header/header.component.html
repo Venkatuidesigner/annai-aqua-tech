@@ -1,0 +1,130 @@
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+  [class.header-solid]="isScrolled()">
+
+  <div class="container-custom">
+    <nav class="flex items-center justify-between h-16 md:h-20">
+
+      <!-- ── Logo ── -->
+      <a routerLink="/" (click)="closeMenu()" class="flex items-center gap-3 group flex-shrink-0">
+        <div class="logo-icon w-10 h-10 rounded-xl flex items-center justify-center shadow-lg
+                    bg-gradient-to-br from-blue-600 to-cyan-500
+                    group-hover:shadow-blue-500/50 transition-shadow duration-300">
+          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 2C8 2 5 7 5 11.5a7 7 0 0014 0C19 7 16 2 12 2z"/>
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M9 13c0 1.66 1.34 3 3 3s3-1.34 3-3" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="leading-none">
+          <div class="text-lg font-black font-heading tracking-tight"
+            [ngClass]="isScrolled() ? 'text-gray-900 dark:text-white' : 'text-white'">
+            Annai Aqua Tech
+          </div>
+          <div class="text-xs font-medium"
+            [ngClass]="isScrolled() ? 'text-blue-600 dark:text-blue-400' : 'text-blue-300'">
+            Pure Water. Healthy Life.
+          </div>
+        </div>
+      </a>
+
+      <!-- ── Desktop Nav ── -->
+      <div class="hidden md:flex items-center gap-1">
+        @for (link of navLinks; track link.path) {
+          <a [routerLink]="link.path" [routerLinkActiveOptions]="{exact: link.exact}"
+            routerLinkActive="nav-active" (click)="closeMenu()"
+            class="nav-link px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+            [ngClass]="isScrolled()
+              ? 'text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20'
+              : 'text-white/90 hover:text-white hover:bg-white/10'">
+            {{ link.label }}
+          </a>
+        }
+      </div>
+
+      <!-- ── Desktop Actions ── -->
+      <div class="hidden md:flex items-center gap-2">
+        <!-- Dark Mode -->
+        <button (click)="themeService.toggleTheme()"
+          class="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
+          [ngClass]="isScrolled()
+            ? 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
+            : 'text-white/80 hover:text-white hover:bg-white/10'"
+          aria-label="Toggle dark mode">
+          @if (themeService.isDarkMode()) {
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          } @else {
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          }
+        </button>
+
+        <!-- Contact CTA -->
+        <a routerLink="/contact" class="btn-cta">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          Contact Us
+        </a>
+      </div>
+
+      <!-- ── Mobile Controls ── -->
+      <div class="flex md:hidden items-center gap-2">
+        <button (click)="themeService.toggleTheme()"
+          class="w-9 h-9 rounded-xl flex items-center justify-center"
+          [ngClass]="isScrolled() ? 'text-gray-700 dark:text-gray-200' : 'text-white'">
+          @if (themeService.isDarkMode()) {
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          } @else {
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          }
+        </button>
+        <button (click)="toggleMenu()" aria-label="Toggle menu"
+          class="w-10 h-10 rounded-xl flex flex-col items-center justify-center gap-1.5"
+          [ngClass]="isScrolled() ? 'text-gray-800 dark:text-white' : 'text-white'">
+          <span class="w-5 h-0.5 bg-current rounded-full transition-all duration-300"
+            [class.rotate-45]="isMenuOpen()" [class.translate-y-2]="isMenuOpen()"></span>
+          <span class="w-5 h-0.5 bg-current rounded-full transition-opacity duration-300"
+            [class.opacity-0]="isMenuOpen()"></span>
+          <span class="w-5 h-0.5 bg-current rounded-full transition-all duration-300"
+            [class.-rotate-45]="isMenuOpen()" [class.-translate-y-2]="isMenuOpen()"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ── Mobile Menu ── -->
+    @if (isMenuOpen()) {
+      <div class="md:hidden mobile-menu mb-4 rounded-2xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700/50 animate-scale-in">
+        <div class="p-3 flex flex-col gap-1">
+          @for (link of navLinks; track link.path) {
+            <a [routerLink]="link.path" [routerLinkActiveOptions]="{exact: link.exact}"
+              routerLinkActive="mobile-active" (click)="closeMenu()"
+              class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold
+                     text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400
+                     hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200">
+              {{ link.label }}
+            </a>
+          }
+          <div class="pt-3 mt-1 border-t border-gray-100 dark:border-gray-700">
+            <a routerLink="/contact" (click)="closeMenu()"
+              class="w-full btn-cta justify-center py-3 text-sm flex">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</header>
+
+<div class="h-16 md:h-20"></div>

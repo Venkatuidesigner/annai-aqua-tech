@@ -1,0 +1,42 @@
+:host { display: block; }
+
+.contact-mat-form {
+  // Make every mat-form-field full width & add spacing
+  mat-form-field {
+    display: block;
+    margin-bottom: 0.5rem;
+
+    // Outline border radius
+    .mdc-notched-outline__leading  { border-radius: 14px 0 0 14px !important; }
+    .mdc-notched-outline__trailing { border-radius: 0 14px 14px 0 !important; }
+
+    // Label color
+    .mat-mdc-form-field-label,
+    .mdc-floating-label { color: #64748b; }
+
+    // Input font
+    input, textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+    }
+  }
+
+  // Submit button
+  .submit-btn {
+    margin-top: 0.75rem;
+    height: 52px;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.01em;
+    border-radius: 16px !important;
+
+    .mat-icon { margin-right: 6px; vertical-align: middle; }
+  }
+}
+
+// Spinner inside button
+mat-spinner {
+  display: inline-block !important;
+  vertical-align: middle;
+  margin-right: 8px;
+}

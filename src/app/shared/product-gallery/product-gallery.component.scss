@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+.main-image-container {
+  &:hover .main-image:not(.scale-150) {
+    transform: scale(1.05);
+  }
+}
+
+.thumbnail {
+  background: linear-gradient(135deg, #eff6ff, #ecfeff);
+
+  :host-context(.dark) & {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+  }
+}

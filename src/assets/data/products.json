@@ -1,0 +1,256 @@
+[
+  {
+    "id": 1,
+    "name": "AquaPure Pro 7-Stage RO Purifier",
+    "price": 12999,
+    "capacity": "10 L/Hr",
+    "storage": "8 L",
+    "description": "Our flagship wall-mount RO purifier with 7-stage purification — RO + UV + UF + TDS Control. Built-in mineral retention technology ensures your water is pure yet mineral-rich.",
+    "features": ["7-Stage RO + UV + UF", "Mineral Retention TDS", "Auto Flush System", "Smart LED Filter Alert", "8 Litre Storage Tank", "Food-Grade Materials"],
+    "category": "home",
+    "isNew": false,
+    "isFeatured": true,
+    "rating": 4.9,
+    "reviewCount": 347,
+    "variants": [
+      {
+        "colorName": "White",
+        "colorCode": "#f8fafc",
+        "images": [
+          "assets/images/products/purifier-white-1.png",
+          "assets/images/products/purifier-white-2.png",
+          "assets/images/products/purifier-white-3.png"
+        ]
+      },
+      {
+        "colorName": "Black",
+        "colorCode": "#1e293b",
+        "images": [
+          "assets/images/products/purifier-black-1.png",
+          "assets/images/products/purifier-black-2.png",
+          "assets/images/products/purifier-black-3.png"
+        ]
+      },
+      {
+        "colorName": "Silver",
+        "colorCode": "#94a3b8",
+        "images": [
+          "assets/images/products/purifier-silver-1.png",
+          "assets/images/products/purifier-silver-2.png"
+        ]
+      },
+      {
+        "colorName": "Blue",
+        "colorCode": "#2563eb",
+        "images": [
+          "assets/images/products/purifier-blue-1.png",
+          "assets/images/products/purifier-blue-2.png"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "AquaSlim Under-Counter RO System",
+    "price": 18499,
+    "capacity": "15 L/Hr",
+    "storage": "10 L",
+    "description": "Space-saving under-counter RO system with a sleek wall-mounted faucet. 5-stage purification with hot & cold dispense technology for modern kitchen aesthetics.",
+    "features": ["5-Stage RO Purification", "Hot & Cold Dispense", "Under-Counter Fit", "Touch Faucet Control", "10 Litre Tank", "1-Year Warranty"],
+    "category": "home",
+    "isNew": true,
+    "isFeatured": true,
+    "rating": 4.8,
+    "reviewCount": 189,
+    "variants": [
+      {
+        "colorName": "Silver",
+        "colorCode": "#94a3b8",
+        "images": [
+          "assets/images/products/undercounter-silver-1.png",
+          "assets/images/products/undercounter-silver-2.png",
+          "assets/images/products/undercounter-silver-3.png"
+        ]
+      },
+      {
+        "colorName": "Black",
+        "colorCode": "#0f172a",
+        "images": [
+          "assets/images/products/undercounter-black-1.png",
+          "assets/images/products/undercounter-black-2.png"
+        ]
+      },
+      {
+        "colorName": "White",
+        "colorCode": "#f1f5f9",
+        "images": [
+          "assets/images/products/undercounter-white-1.png",
+          "assets/images/products/undercounter-white-2.png"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "AquaUV+ Countertop UV Purifier",
+    "price": 6499,
+    "capacity": "12 L/Hr",
+    "storage": "4 L",
+    "description": "Compact countertop UV + UF purifier ideal for municipal water supply. No wastage — 100% water utilisation with advanced UV-C lamp technology.",
+    "features": ["UV-C Purification", "UF Membrane", "Zero Water Wastage", "Compact Design", "4 Litre Tank", "Easy Installation"],
+    "category": "home",
+    "isNew": false,
+    "isFeatured": true,
+    "rating": 4.7,
+    "reviewCount": 412,
+    "variants": [
+      {
+        "colorName": "White",
+        "colorCode": "#f8fafc",
+        "images": [
+          "assets/images/products/uv-white-1.png",
+          "assets/images/products/uv-white-2.png",
+          "assets/images/products/uv-white-3.png"
+        ]
+      },
+      {
+        "colorName": "Gray",
+        "colorCode": "#64748b",
+        "images": [
+          "assets/images/products/uv-gray-1.png",
+          "assets/images/products/uv-gray-2.png"
+        ]
+      },
+      {
+        "colorName": "Blue",
+        "colorCode": "#3b82f6",
+        "images": [
+          "assets/images/products/uv-blue-1.png",
+          "assets/images/products/uv-blue-2.png"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "AquaOffice Smart RO Dispenser",
+    "price": 24999,
+    "capacity": "20 L/Hr",
+    "storage": "12 L",
+    "description": "Enterprise-grade RO water dispenser for offices. Smart IoT-enabled with app monitoring, hot-cold-normal dispensing modes and filter life tracking.",
+    "features": ["IoT App Monitoring", "Hot Cold Normal Modes", "20 L/Hr Capacity", "Filter Life Tracker", "12 Litre Storage", "Auto Sanitise Cycle"],
+    "category": "office",
+    "isNew": true,
+    "isFeatured": true,
+    "rating": 4.9,
+    "reviewCount": 98,
+    "variants": [
+      {
+        "colorName": "Black",
+        "colorCode": "#1e293b",
+        "images": [
+          "assets/images/products/office-black-1.png",
+          "assets/images/products/office-black-2.png",
+          "assets/images/products/office-black-3.png"
+        ]
+      },
+      {
+        "colorName": "Silver",
+        "colorCode": "#cbd5e1",
+        "images": [
+          "assets/images/products/office-silver-1.png",
+          "assets/images/products/office-silver-2.png"
+        ]
+      },
+      {
+        "colorName": "White",
+        "colorCode": "#f8fafc",
+        "images": [
+          "assets/images/products/office-white-1.png",
+          "assets/images/products/office-white-2.png"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "AquaCommercial 500 LPH RO Plant",
+    "price": 89999,
+    "capacity": "500 L/Hr",
+    "storage": "500 L",
+    "description": "Industrial-grade commercial RO plant for restaurants, clinics, factories and housing societies. Stainless steel frame with digital TDS display and automated flushing.",
+    "features": ["500 LPH Output", "SS 304 Frame", "Digital TDS Display", "Auto Flush Timer", "Pre-Filter System", "Commercial Grade Pumps"],
+    "category": "commercial",
+    "isNew": false,
+    "isFeatured": false,
+    "rating": 4.8,
+    "reviewCount": 64,
+    "variants": [
+      {
+        "colorName": "Silver",
+        "colorCode": "#94a3b8",
+        "images": [
+          "assets/images/products/commercial-silver-1.png",
+          "assets/images/products/commercial-silver-2.png",
+          "assets/images/products/commercial-silver-3.png"
+        ]
+      },
+      {
+        "colorName": "Gray",
+        "colorCode": "#475569",
+        "images": [
+          "assets/images/products/commercial-gray-1.png",
+          "assets/images/products/commercial-gray-2.png"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "AquaMini Portable RO Purifier",
+    "price": 4999,
+    "capacity": "5 L/Hr",
+    "storage": "2 L",
+    "description": "Ultra-compact portable RO purifier for travel, rental homes and small kitchens. Runs on electricity and delivers 99.9% pure water anywhere you go.",
+    "features": ["4-Stage RO", "Portable Design", "Low Power Consumption", "2 Litre Tank", "Travel Friendly", "Easy Cartridge Swap"],
+    "category": "portable",
+    "isNew": true,
+    "isFeatured": false,
+    "rating": 4.6,
+    "reviewCount": 231,
+    "variants": [
+      {
+        "colorName": "White",
+        "colorCode": "#f8fafc",
+        "images": [
+          "assets/images/products/mini-white-1.png",
+          "assets/images/products/mini-white-2.png"
+        ]
+      },
+      {
+        "colorName": "Blue",
+        "colorCode": "#2563eb",
+        "images": [
+          "assets/images/products/mini-blue-1.png",
+          "assets/images/products/mini-blue-2.png"
+        ]
+      },
+      {
+        "colorName": "Gray",
+        "colorCode": "#64748b",
+        "images": [
+          "assets/images/products/mini-gray-1.png",
+          "assets/images/products/mini-gray-2.png"
+        ]
+      },
+      {
+        "colorName": "Black",
+        "colorCode": "#1e293b",
+        "images": [
+          "assets/images/products/mini-black-1.png",
+          "assets/images/products/mini-black-2.png"
+        ]
+      }
+    ]
+  }
+]

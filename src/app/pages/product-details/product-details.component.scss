@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.variant-btn {
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
